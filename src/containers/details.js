@@ -7,7 +7,7 @@ class Details extends Component {
 			return (<p />)
 		}
 		return (
-			<div class='details'>
+			<div className='details'>
 				<h2>{this.props.client.general.firstName} {this.props.client.general.lastName}</h2>
 				<img src={this.props.client.general.avatar} /><br />
 				<p>Company: {this.props.client.job.company}</p>
