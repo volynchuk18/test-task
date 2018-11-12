@@ -8,30 +8,27 @@ class Details extends Component {
 		}
 		return (
 			<div className='details'>
-			 <table width="100%" cellSpacing="0" cellPadding="0">
-			 	<tbody>
-				 	<tr> 
-				 		<td className='leftcol'>
-				 			<img src={this.props.client.general.avatar} alt='cant load img'/><br />
-				 		</td>
-				 		<td className='detailsText'>
-				 			<h3>{this.props.client.general.firstName}
-				 				{this.props.client.general.lastName}
-				 			</h3>
-				 			<p>Company: {this.props.client.job.company}</p>
-							<p>Title: {this.props.client.job.title}</p>
-							<p>Email: {this.props.client.contact.email}</p>
-			      			<p>Phone: {this.props.client.contact.phone}</p>
-			      			<p>Country: {this.props.client.address.country}</p>
-			      			<p>City: {this.props.client.address.city}</p>
-			      			<p>Street: {this.props.client.address.street}</p>
-			      			<p>ZipCode: {this.props.client.address.zipCode}</p>
-				 		</td>
-				 	</tr>
+			 <table>
+			 	<tbody>				 	
+			 		<td className='leftcol'>
+			 			<img src={this.props.client.general.avatar} alt='cant load img'/><br />
+			 		</td>
+			 		<td className='detailsText'>
+			 			<h2>{this.props.client.general.firstName + ' '}
+			 				{this.props.client.general.lastName}
+			 			</h2>				 			
+			 			<p><b>Company:</b> {this.props.client.job.company}</p>
+						<p><b>Title:</b> {this.props.client.job.title}</p>
+						<p><b>Email:</b> {this.props.client.contact.email}</p>
+		      			<p><b>Phone:</b> {this.props.client.contact.phone}</p>
+		      			<p><b>Country:</b> {this.props.client.address.country}</p>
+		      			<p><b>City:</b> {this.props.client.address.city}</p>
+		      			<p><b>Street:</b> {this.props.client.address.street}</p>
+		      			<p><b>ZipCode:</b> {this.props.client.address.zipCode}</p>
+		      		</td>
+				 	
 			 	</tbody>
-			 </table>
-				<h2></h2>
-				
+			 </table>				
 				
 			</div>
 		);

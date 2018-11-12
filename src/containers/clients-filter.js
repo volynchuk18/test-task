@@ -10,6 +10,7 @@ class SearchBar extends Component {
     const {search, value} = this.props;
     return (
         <Input icon='search' 
+          className='searchBar'
           placeholder='Search...' 
           value={value}
           onChange={(e) => search(e.target.value)}>

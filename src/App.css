@@ -38,9 +38,13 @@
   overflow: scroll
 }
 
+.searchBar {
+  width: 99%
+}
+
 .details {
-  float:left;
-  width: 400px;
+  float: left;
+  width: 600px;
   height: 400px;
   padding: 25px;
 }
