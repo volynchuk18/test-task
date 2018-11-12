@@ -1,34 +1,47 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {selectClient} from '../actions/index';
+import {selectClient, fetchClientsSuccess} from '../actions/index';
 import Search from './clients-filter';
+import {List, Image} from 'semantic-ui-react'
 
 class ClientsList extends Component {
-	showList() {
+	componentWillMount() {	
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', 'clients.json', true);
 
-		return this.props.filteredList.map( (item, id) => {
-			return (<div role='listitem' className='item' key={id} onClick={() => this.props.selectClient(item)}>				
-						<img className='ui avatar image' src={item.general.avatar} />
-							<div className='content'>
-						      <p className='header'>{item.general.firstName}</p>
-							      <div className='description'>
+		xhr.onreadystatechange = () => { 
+		  if (xhr.readyState !== 4) return;
+		  if (xhr.status === 200) {
+		  	this.props.fetchClientsSuccess(JSON.parse(xhr.responseText))
+		  } 
+		}
+		xhr.send();
+	}
+
+	renderList() {
+		return this.props.filter.map( (item, id) => {
+			return (<List.Item key={id} onClick={() => this.props.selectClient(item)}>				
+						<Image avatar src={item.general.avatar} />
+							<List.Content>
+						     <List.Header as='a'>{item.general.firstName}</List.Header>
+							      <List.Description>
 							        {item.job.title}
-							      </div>
-						    </div>						    
-					</div>										
+							      </List.Description>
+						    </List.Content>						    
+					</List.Item>										
 			);
 		});
 	}
-
+	
 	render() {
 
 		return (
 			<div className='sidebar'>
 				<Search />
-				<div role='list' className='ui selection middle aligned list'>				
-					{this.showList()}			
-				</div>
+				<List selection verticalAlign='middle'>		
+					{this.renderList()}			
+				</List>
 			</div>
 		);
 	}
@@ -36,13 +49,12 @@ class ClientsList extends Component {
 
 function mapStateToProps(state) {
 	return {
-		clients: state.clients,
-		filteredList: state.search.filteredList
+		filter: state.clients.filteredClients
 	};
 }
 
 function matchDispatchToProps(dispatch) {
-	return bindActionCreators({selectClient: selectClient}, dispatch)
+	return bindActionCreators({selectClient, fetchClientsSuccess}, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(ClientsList);
